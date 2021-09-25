@@ -1,14 +1,18 @@
 from PIL import Image
 
 
-def image_resizer():
+def scale_size(size, factor):
+    return ((size[0] // factor), (size[1] // factor))
+
+
+def image_resizer(imgfile):
     # read the image
-    img = Image.open("images/IMG_1316.jpg")
+    img = Image.open(imgfile)
 
     size = img.size
 
     # reduce size by half
-    size = ((size[0] // 2), (size[1] // 2))
+    size = scale_size(size, 2)
 
     # resize image
     img = img.resize(size)
@@ -16,8 +20,14 @@ def image_resizer():
     # save resized image
     img.save('resize-output.jpg', quality=85)
 
-    # Create square version
-    # start_x = (size[0] - size[1]) // 2
+    make_thumbnail(img)
+
+
+def make_thumbnail(img: Image):
+
+    # reduce size by half
+    size = scale_size(img.size, 2)
+    img = img.resize(size)
 
     box = (0, 0, size[1], size[1])
     size = (size[1], size[1])
@@ -26,4 +36,4 @@ def image_resizer():
 
 
 if __name__ == "__main__":
-    image_resizer()
+    image_resizer("images/IMG_1316.jpg")
