@@ -56,10 +56,11 @@ def make_thumbnail(img: Image):
     img = img.resize(size)
 
     start_x = (size[0] - size[1]) // 2
-
-    box = (start_x, 0, size[1], size[1])
-    size = (size[1], size[1])
-    return img.resize(size, box=box)
+    box = (
+      start_x, 0,
+      start_x + size[1],
+      size[1])
+    return img.crop(box)
 
 
 def image_process_directory(directory: str):
@@ -73,7 +74,7 @@ def image_process_directory(directory: str):
 
 if __name__ == "__main__":
     image_path = sys.argv[1]
-    # image_path = 'images/'
+    # image_path = 'images/IMG_1340.jpg'
 
     if os.path.exists(image_path):
 
