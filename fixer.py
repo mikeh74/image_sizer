@@ -10,7 +10,7 @@ def scale_size(size, factor):
 
 def save_image(img: Image, filename: str, quality: int = 85):
     path = os.path.join('output', filename)
-    img.save(path, quality=85)
+    img.save(path, quality=quality)
 
 
 def image_resizer(imgfile):
