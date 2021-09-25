@@ -26,7 +26,7 @@ def image_resizer(imgfile):
 
     save_image(
         make_thumbnail(img),
-        "{}_thumb.jpg".format(filename),
+        "{}_sq_thumb.jpg".format(filename),
         70
     )
 
@@ -34,8 +34,12 @@ def image_resizer(imgfile):
 def make_resized(img: Image):
     size = img.size
 
+    factor = 2
+    if size[0] > 1000:
+        factor = size[0] // 1000
+
     # reduce size by half
-    size = scale_size(size, 2)
+    size = scale_size(size, factor)
 
     # resize image
     return img.resize(size)
@@ -43,20 +47,41 @@ def make_resized(img: Image):
 
 def make_thumbnail(img: Image):
 
+    factor = 2
+    if img.size[0] > 1000:
+        factor = img.size[0] // 1000
+
     # reduce size by half
-    size = scale_size(img.size, 2)
+    size = scale_size(img.size, (factor * 2))
     img = img.resize(size)
 
-    box = (0, 0, size[1], size[1])
+    start_x = (size[0] - size[1]) // 2
+
+    box = (start_x, 0, size[1], size[1])
     size = (size[1], size[1])
     return img.resize(size, box=box)
 
 
+def image_process_directory(directory: str):
+    for filename in os.listdir(directory):
+        f = os.path.join(directory, filename)
+        # checking if it is a file
+        if os.path.isfile(f):
+            if os.path.splitext(f)[1] == '.jpg':
+                image_resizer(f)
+
+
 if __name__ == "__main__":
     image_path = sys.argv[1]
+    # image_path = 'images/'
 
-    # image_path = 'images/IMG_1330.jpg'
     if os.path.exists(image_path):
-        image_resizer(image_path)
+
+        if os.path.isfile(image_path):
+            image_resizer(image_path)
+
+        if os.path.isdir(image_path):
+            image_process_directory(image_path)
+
     else:
         raise Exception('Path doesn\'t exist')
