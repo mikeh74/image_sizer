@@ -140,3 +140,4 @@ dmypy.json
 cython_debug/
 resize-output.jpg
 resize-thumb.jpg
+output/
