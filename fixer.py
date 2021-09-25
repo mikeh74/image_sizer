@@ -53,10 +53,9 @@ def make_thumbnail(img: Image):
 
 
 if __name__ == "__main__":
-    # image_path = sys.argv[1]
-    # image_resizer(image_path)
+    image_path = sys.argv[1]
 
-    image_path = 'images/IMG_1330.jpg'
+    # image_path = 'images/IMG_1330.jpg'
     if os.path.exists(image_path):
         image_resizer(image_path)
     else:
