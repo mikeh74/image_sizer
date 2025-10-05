@@ -146,7 +146,7 @@ git commit --no-verify -m "commit message"
 
 ## Requirements
 
-- Python 3.8+
+- Python 3.10+
 - Pillow (PIL)
 
 ## License
