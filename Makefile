@@ -35,13 +35,16 @@ install-dev: .venv/bin/activate
 	$(PIP) install -e ".[dev]"
 
 # Code quality targets
-lint:
+.venv/bin/ruff: .venv/bin/activate
+	$(PIP) install ruff
+
+lint: .venv/bin/ruff
 	$(RUFF) check src/ tests/
 
-format:
+format: .venv/bin/ruff
 	$(RUFF) format src/ tests/
 
-format-check:
+format-check: .venv/bin/ruff
 	$(RUFF) format --check src/ tests/
 
 check: lint format-check
