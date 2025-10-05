@@ -22,11 +22,16 @@ help:
 	@echo "  dist         - Create distribution files"
 	@echo "  upload       - Upload to PyPI (requires authentication)"
 
+# Create virtual environment if it doesn't exist
+.venv/bin/activate:
+	python3 -m venv .venv
+	$(PIP) install --upgrade pip setuptools wheel
+
 # Installation targets
-install:
+install: .venv/bin/activate
 	$(PIP) install .
 
-install-dev:
+install-dev: .venv/bin/activate
 	$(PIP) install -e ".[dev]"
 
 # Code quality targets
@@ -43,10 +48,11 @@ check: lint format-check
 	@echo "✅ All checks passed!"
 
 # Pre-commit targets
-pre-commit:
+pre-commit: pre-commit-install
 	$(PRE_COMMIT) run --all-files
 
 pre-commit-install:
+	$(PIP) install pre-commit
 	$(PRE_COMMIT) install
 
 pre-commit-update:
@@ -61,6 +67,7 @@ test-cov:
 
 # Build and distribution targets
 clean:
+	rm -rf .venv/
 	rm -rf build/
 	rm -rf dist/
 	rm -rf *.egg-info/
