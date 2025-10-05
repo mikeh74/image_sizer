@@ -2,7 +2,6 @@
 
 import argparse
 import sys
-from typing import Optional
 
 from .core import ImageProcessor
 
@@ -68,7 +67,7 @@ def validate_args(args: argparse.Namespace) -> None:
         raise ValueError("Thumbnail quality must be between 1 and 100")
 
 
-def main(argv: Optional[list] = None) -> int:
+def main(argv: list | None = None) -> int:
     """Main entry point for the CLI."""
     parser = create_parser()
     args = parser.parse_args(argv)

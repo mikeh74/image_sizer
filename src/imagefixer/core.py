@@ -2,7 +2,6 @@
 
 import os
 from pathlib import Path
-from typing import Optional, Tuple
 
 from PIL import Image
 
@@ -21,7 +20,7 @@ class ImageProcessor:
         self.thumbnail_quality = thumbnail_quality
 
     @staticmethod
-    def scale_size(size: Tuple[int, int], factor: int) -> Tuple[int, int]:
+    def scale_size(size: tuple[int, int], factor: int) -> tuple[int, int]:
         """Scale a size tuple by a factor.
 
         Args:
@@ -38,7 +37,7 @@ class ImageProcessor:
         img: Image.Image,
         filename: str,
         outfile: str,
-        quality: Optional[int] = None,
+        quality: int | None = None,
     ) -> None:
         """Save image to specified location.
 
@@ -135,7 +134,7 @@ class ImageProcessor:
             ):
                 self.process_image(file_path, outfile)
 
-    def process_path(self, input_path: str, output_path: Optional[str] = None) -> None:
+    def process_path(self, input_path: str, output_path: str | None = None) -> None:
         """Process a file or directory of images.
 
         Args:
