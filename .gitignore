@@ -142,3 +142,4 @@ resize-output.jpg
 resize-thumb.jpg
 output/
 .vscode/launch.json
+.vscode/
