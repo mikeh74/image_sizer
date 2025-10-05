@@ -10,7 +10,7 @@ readme = "README.md"
 license = "MIT"
 requires-python = ">=3.10"
 authors = [
-    { name = "Mike Horrocks", email = "mike@example.com" },
+    { name = "Mike Horrocks", email = "mikeh_74_@outlook.com" },
 ]
 keywords = ["image", "resize", "thumbnail", "PIL", "Pillow"]
 classifiers = [
